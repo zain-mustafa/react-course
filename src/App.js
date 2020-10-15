@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import styled from 'styled-components';
 import './App.css';
 import Person from './Person/Person'
+
+// const StyledButton = styled.button`
+
+// `;
 
 class App extends Component {
   state = {
@@ -47,13 +51,18 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   ':hover': {
+    //     backgroundColor: 'lightgreen',
+    //     color: 'black'
+    //   }
+    // };
 
     let persons = null;
     if(this.state.showPersons) {
@@ -68,16 +77,32 @@ class App extends Component {
             changed={(event) => this.nameChangeHandler(event, person.id)} />
           })}
     </div>
-      )
+      );
+      // style.backgroundColor = 'red';
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
     }
 
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <=1) {
+      classes.push('bold');
+    }
+
+
+
     return (
-      <div className="App">
+        <div className="App">
         <h1>This is a test file!</h1>
-        <button  style={style} 
+        <p className={classes.join(' ')}>This is really working!</p>
+        <StyledButton alt={this.state.showPersons}
         onClick={this.togglePersonsHandler}>
-          Switch Name
-        </button>
+          Toggle Name
+        </StyledButton>
          {persons}
       </div>
     );
