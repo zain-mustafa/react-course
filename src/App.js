@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+
 import './App.css';
-import Person from './Person/Person'
-
-// const StyledButton = styled.button`
-
-// `;
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Person from './Person/Person';
 
 class App extends Component {
   state = {
@@ -69,12 +66,15 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person
-            click={() => this.deletePersonHandler(index)}
-            name={person.name}
-            age={person.age} 
+            return <ErrorBoundary 
             key={person.id}
-            changed={(event) => this.nameChangeHandler(event, person.id)} />
+            >
+              <Person
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age} 
+                changed={(event) => this.nameChangeHandler(event, person.id)} />
+            </ErrorBoundary>
           })}
     </div>
       );
@@ -99,10 +99,10 @@ class App extends Component {
         <div className="App">
         <h1>This is a test file!</h1>
         <p className={classes.join(' ')}>This is really working!</p>
-        <StyledButton alt={this.state.showPersons}
+        <button
         onClick={this.togglePersonsHandler}>
           Toggle Name
-        </StyledButton>
+        </button>
          {persons}
       </div>
     );
